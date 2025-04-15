@@ -213,6 +213,10 @@ impl Build {
             }
         }
 
+        if target.contains("msvc") {
+            config.shared_flag(true);
+        }
+
         config.out_dir(&lib_dir).compile(lib_name);
 
         for f in &["lauxlib.h", "lua.h", "luaconf.h", "lualib.h"] {
