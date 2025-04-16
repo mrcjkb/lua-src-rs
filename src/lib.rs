@@ -145,11 +145,20 @@ impl Build {
             config.define("LUA_USE_APICHECK", None);
         }
 
-        let lib_name = match version {
-            Lua51 => "lua5.1",
-            Lua52 => "lua5.2",
-            Lua53 => "lua5.3",
-            Lua54 => "lua5.4",
+        let lib_name = if target.contains("msvc") {
+            match version {
+                Lua51 => "lua51",
+                Lua52 => "lua52",
+                Lua53 => "lua53",
+                Lua54 => "lua54",
+            }
+        } else {
+            match version {
+                Lua51 => "lua5.1",
+                Lua52 => "lua5.2",
+                Lua53 => "lua5.3",
+                Lua54 => "lua5.4",
+            }
         };
 
         config
