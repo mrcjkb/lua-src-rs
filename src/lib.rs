@@ -237,13 +237,17 @@ impl Build {
 }
 
 impl Version {
-    fn source_dir(&self) -> &str {
+    pub fn version_str(&self) -> &str {
         match self {
-            Lua51 => "lua-5.1.5",
-            Lua52 => "lua-5.2.4",
-            Lua53 => "lua-5.3.6",
-            Lua54 => "lua-5.4.8",
+            Lua51 => "5.1.5",
+            Lua52 => "5.2.4",
+            Lua53 => "5.3.6",
+            Lua54 => "5.4.8",
         }
+    }
+
+    fn source_dir(&self) -> String {
+        format!("lua-{}", self.version_str())
     }
 
     fn lib_name(&self) -> &str {
